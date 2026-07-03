@@ -2,6 +2,7 @@
 import sys
 import termios
 import tty
+import select
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
@@ -10,42 +11,51 @@ class WASDTeleop(Node):
     def __init__(self):
         super().__init__('wasd_teleop')
         self.pub = self.create_publisher(Twist, '/cmd_vel', 10)
-        self.linear_speed = 0.3
-        self.angular_speed = 0.8
-        self.strafe_speed = 0.3
+        self.linear_speed = 1.0
+        self.angular_speed = 2.5
+        self.linear_x = 0.0
+        self.angular_z = 0.0
 
-    def get_key(self):
+    def get_key(self, timeout=0.1):
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
         try:
             tty.setraw(fd)
-            key = sys.stdin.read(1)
+            rlist, _, _ = select.select([sys.stdin], [], [], timeout)
+            if rlist:
+                key = sys.stdin.read(1)
+            else:
+                key = ''
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
         return key
 
     def run(self):
-        print("WASD to move, Q/E to strafe left/right, X to stop, Ctrl+C to quit")
-        twist = Twist()
+        print("W/S = forward/back, A/D = rotate left/right, hold combos to curve, X = stop, Ctrl+C = quit")
         while rclpy.ok():
             key = self.get_key()
-            twist = Twist()
+
             if key == 'w':
-                twist.linear.x = self.linear_speed
+                self.linear_x = self.linear_speed
             elif key == 's':
-                twist.linear.x = -self.linear_speed
+                self.linear_x = -self.linear_speed
             elif key == 'a':
-                twist.angular.z = self.angular_speed
+                self.angular_z = self.angular_speed
             elif key == 'd':
-                twist.angular.z = -self.angular_speed
-            elif key == 'q':
-                twist.linear.y = self.strafe_speed
-            elif key == 'e':
-                twist.linear.y = -self.strafe_speed
+                self.angular_z = -self.angular_speed
             elif key == 'x':
-                pass
+                self.linear_x = 0.0
+                self.angular_z = 0.0
             elif key == '\x03':
                 break
+            elif key == '':
+                # No key pressed recently, decay to stop
+                self.linear_x = 0.0
+                self.angular_z = 0.0
+
+            twist = Twist()
+            twist.linear.x = self.linear_x
+            twist.angular.z = self.angular_z
             self.pub.publish(twist)
 
 def main():
