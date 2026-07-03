@@ -1,6 +1,11 @@
 <?xml version="1.0" ?>
 <sdf version="1.8">
   <world name="multi_room">
+    <physics name="default_physics" type="dartsim">
+      <max_step_size>0.0005</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>2000</real_time_update_rate>
+    </physics>
     <scene>
       <ambient>0.6 0.6 0.6 1</ambient>
       <background>0.5 0.5 0.5 1</background>
