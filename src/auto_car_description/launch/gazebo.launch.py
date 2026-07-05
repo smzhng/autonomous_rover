@@ -1,6 +1,6 @@
 import os
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess, DeclareLaunchArgument
+from launch.actions import ExecuteProcess, DeclareLaunchArgument, SetEnvironmentVariable
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
@@ -20,7 +20,13 @@ def generate_launch_description():
 
     world_file = [os.path.join(pkg, 'worlds', ''), LaunchConfiguration('world')]
 
+    resource_path = SetEnvironmentVariable(
+        name='GZ_SIM_RESOURCE_PATH',
+        value=os.path.join(pkg, '..')
+    )
+
     return LaunchDescription([
+        resource_path,
         world_arg,
         ExecuteProcess(
             cmd=['gz', 'sim', world_file],

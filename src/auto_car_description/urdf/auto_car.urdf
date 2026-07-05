@@ -19,7 +19,7 @@
 
   <link name="chassis_link">
     <inertial>
-      <origin xyz="0.699848734314105 0.937841658096233 1.33840630818217" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <mass value="0.587421422264195"/>
       <inertia
         ixx="0.000460556536882904" ixy="-3.95902913553881E-05" ixz="-4.08699152625963E-06"
@@ -37,7 +37,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://auto_car_description/meshes/chassis_link.STL"/>
+        <box size="0.22713 0.121 0.033"/>
       </geometry>
     </collision>
   </link>
@@ -60,9 +60,17 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0.0153 0" rpy="1.5708 0 0"/>
       <geometry>
-        <mesh filename="package://auto_car_description/meshes/front_right_wheel_link.STL"/>
+        <cylinder radius="0.030" length="0.030"/>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+          </ode>
+        </friction>
+      </surface>
       </geometry>
     </collision>
   </link>
@@ -93,9 +101,17 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 -0.0153 0" rpy="1.5708 0 0"/>
       <geometry>
-        <mesh filename="package://auto_car_description/meshes/front_left_wheel_link.STL"/>
+        <cylinder radius="0.030" length="0.030"/>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+          </ode>
+        </friction>
+      </surface>
       </geometry>
     </collision>
   </link>
@@ -126,9 +142,17 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0.0153 0" rpy="1.5708 0 0"/>
       <geometry>
-        <mesh filename="package://auto_car_description/meshes/back_right_wheel_link.STL"/>
+        <cylinder radius="0.030" length="0.030"/>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+          </ode>
+        </friction>
+      </surface>
       </geometry>
     </collision>
   </link>
@@ -159,9 +183,17 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 -0.0153 0" rpy="1.5708 0 0"/>
       <geometry>
-        <mesh filename="package://auto_car_description/meshes/back_left_wheel_link.STL"/>
+        <cylinder radius="0.030" length="0.030"/>
+      <surface>
+        <friction>
+          <ode>
+            <mu>1.0</mu>
+            <mu2>1.0</mu2>
+          </ode>
+        </friction>
+      </surface>
       </geometry>
     </collision>
   </link>
