@@ -3,7 +3,7 @@ project(auto_car_description)
 
 find_package(ament_cmake REQUIRED)
 
-install(DIRECTORY urdf launch rviz worlds
+install(DIRECTORY urdf launch rviz worlds meshes
   DESTINATION share/${PROJECT_NAME}
 )
 

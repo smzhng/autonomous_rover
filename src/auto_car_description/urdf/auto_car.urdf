@@ -1,262 +1,218 @@
 <?xml version="1.0"?>
-<robot name="auto_car">
+<robot name="assembly_for_urdf">
 
   <link name="base_footprint"/>
 
   <joint name="base_footprint_joint" type="fixed">
     <parent link="base_footprint"/>
     <child link="base_link"/>
-    <origin xyz="0 0 0.0165" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
   </joint>
 
-  <link name="base_link">
-    <visual>
-      <geometry>
-        <box size="0.224 0.121 0.033"/>
-      </geometry>
-      <material name="grey">
-        <color rgba="0.5 0.5 0.5 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <box size="0.224 0.121 0.033"/>
-      </geometry>
-    </collision>
-    <inertial>
-      <mass value="2.0"/>
-      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.02"/>
-    </inertial>
-  </link>
+  <link name="base_link"/>
 
-  <link name="wheel_front_left">
-    <visual>
-      <geometry>
-        <cylinder radius="0.030" length="0.030"/>
-      </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1.0"/>
-      </material>
-    </visual>
-    <collision>
-      <geometry>
-        <cylinder radius="0.030" length="0.030"/>
-      </geometry>
-      <surface>
-        <friction>
-          <ode>
-            <mu>1.0</mu>
-            <mu2>1.0</mu2>
-          </ode>
-        </friction>
-      </surface>
-    </collision>
-    <inertial>
-      <mass value="0.1"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
-    </inertial>
-  </link>
-
-  <joint name="joint_front_left" type="continuous">
+  <joint name="chassis_joint" type="fixed">
     <parent link="base_link"/>
-    <child link="wheel_front_left"/>
-    <origin xyz="0.064 0.0755 -0.0165" rpy="1.5708 0 0"/>
-    <axis xyz="0 0 -1"/>
+    <child link="chassis_link"/>
+    <origin xyz="-0.6986 1.338 -0.88691"/>
   </joint>
 
-  <link name="wheel_front_right">
+  <link name="chassis_link">
+    <inertial>
+      <origin xyz="0.699848734314105 0.937841658096233 1.33840630818217" rpy="0 0 0"/>
+      <mass value="0.587421422264195"/>
+      <inertia
+        ixx="0.000460556536882904" ixy="-3.95902913553881E-05" ixz="-4.08699152625963E-06"
+        iyy="0.0018607603469361" iyz="-2.99347026067922E-07" izz="0.00150117181600011"/>
+    </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.030" length="0.030"/>
+        <mesh filename="package://auto_car_description/meshes/chassis_link.STL"/>
       </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1.0"/>
+      <material name="">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
       </material>
     </visual>
     <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.030" length="0.030"/>
+        <mesh filename="package://auto_car_description/meshes/chassis_link.STL"/>
       </geometry>
-      <surface>
-        <friction>
-          <ode>
-            <mu>1.0</mu>
-            <mu2>1.0</mu2>
-          </ode>
-        </friction>
-      </surface>
     </collision>
-    <inertial>
-      <mass value="0.1"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
-    </inertial>
   </link>
 
-  <joint name="joint_front_right" type="continuous">
-    <parent link="base_link"/>
-    <child link="wheel_front_right"/>
-    <origin xyz="0.064 -0.0755 -0.0165" rpy="1.5708 0 0"/>
-    <axis xyz="0 0 -1"/>
-  </joint>
-
-  <link name="wheel_rear_left">
+  <link name="front_right_wheel_link">
+    <inertial>
+      <origin xyz="-1.5092230508551E-05 0.015311291363435 3.11265845716058E-05" rpy="0 0 0"/>
+      <mass value="0.0536934866822392"/>
+      <inertia
+        ixx="5.73491871355838E-06" ixy="-2.61059975080162E-11" ixz="1.47748729726266E-10"
+        iyy="6.54339836267483E-06" iyz="-3.80479098173267E-11" izz="5.7342806732556E-06"/>
+    </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.030" length="0.030"/>
+        <mesh filename="package://auto_car_description/meshes/front_right_wheel_link.STL"/>
       </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1.0"/>
+      <material name="">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
       </material>
     </visual>
     <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.030" length="0.030"/>
+        <mesh filename="package://auto_car_description/meshes/front_right_wheel_link.STL"/>
       </geometry>
-      <surface>
-        <friction>
-          <ode>
-            <mu>1.0</mu>
-            <mu2>1.0</mu2>
-          </ode>
-        </friction>
-      </surface>
     </collision>
-    <inertial>
-      <mass value="0.1"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
-    </inertial>
   </link>
 
-  <joint name="joint_rear_left" type="continuous">
-    <parent link="base_link"/>
-    <child link="wheel_rear_left"/>
-    <origin xyz="-0.078 0.0755 -0.0165" rpy="1.5708 0 0"/>
-    <axis xyz="0 0 -1"/>
+  <joint name="front_right_wheel_joint" type="continuous">
+    <origin xyz="0.62608 -1.2445 0.91691" rpy="0 0 3.1416"/>
+    <parent link="chassis_link"/>
+    <child link="front_right_wheel_link"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
-  <link name="wheel_rear_right">
+  <link name="front_left_wheel_link">
+    <inertial>
+      <origin xyz="5.91415805217821E-13 -0.0153279724710507 1.55864210427126E-12" rpy="0 0 0"/>
+      <mass value="0.0536235654026291"/>
+      <inertia
+        ixx="5.73404904590935E-06" ixy="3.90479839306107E-17" ixz="-2.07885647253931E-10"
+        iyy="6.54310722970969E-06" iyz="9.62187415013861E-17" izz="5.73461421348107E-06"/>
+    </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.030" length="0.030"/>
+        <mesh filename="package://auto_car_description/meshes/front_left_wheel_link.STL"/>
       </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1.0"/>
+      <material name="">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
       </material>
     </visual>
     <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.030" length="0.030"/>
+        <mesh filename="package://auto_car_description/meshes/front_left_wheel_link.STL"/>
       </geometry>
-      <surface>
-        <friction>
-          <ode>
-            <mu>1.0</mu>
-            <mu2>1.0</mu2>
-          </ode>
-        </friction>
-      </surface>
     </collision>
-    <inertial>
-      <mass value="0.1"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
-    </inertial>
   </link>
 
-  <joint name="joint_rear_right" type="continuous">
-    <parent link="base_link"/>
-    <child link="wheel_rear_right"/>
-    <origin xyz="-0.078 -0.0755 -0.0165" rpy="1.5708 0 0"/>
-    <axis xyz="0 0 -1"/>
+  <joint name="front_left_wheel_joint" type="continuous">
+    <origin xyz="0.62608 -1.432 0.91691" rpy="0 0 3.1416"/>
+    <parent link="chassis_link"/>
+    <child link="front_left_wheel_link"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
-  <!-- Top cover lower block (front) -->
-  <link name="cover_lower">
+  <link name="back_right_wheel_link">
+    <inertial>
+      <origin xyz="-1.47748480117116E-12 0.015327972470953 7.86593012946923E-13" rpy="0 0 0"/>
+      <mass value="0.0536235654025979"/>
+      <inertia
+        ixx="5.7340889500821E-06" ixy="9.2610545788829E-17" ixz="-2.53331092662428E-10"
+        iyy="6.54310722971889E-06" iyz="-5.09878787203795E-17" izz="5.73457430930912E-06"/>
+    </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.102 0.100 0.0275"/>
+        <mesh filename="package://auto_car_description/meshes/back_right_wheel_link.STL"/>
       </geometry>
-      <material name="grey">
-        <color rgba="0.7 0.7 0.7 1.0"/>
+      <material name="">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
       </material>
     </visual>
     <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.102 0.100 0.0275"/>
+        <mesh filename="package://auto_car_description/meshes/back_right_wheel_link.STL"/>
       </geometry>
     </collision>
-    <inertial>
-      <mass value="0.1"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
-    </inertial>
   </link>
 
-  <joint name="joint_cover_lower" type="fixed">
-    <parent link="base_link"/>
-    <child link="cover_lower"/>
-    <origin xyz="0.038 0.0 0.03025" rpy="0 0 0"/>
+  <joint name="back_right_wheel_joint" type="continuous">
+    <origin xyz="0.77108 -1.2445 0.91691" rpy="0 0 3.1416"/>
+    <parent link="chassis_link"/>
+    <child link="back_right_wheel_link"/>
+    <axis xyz="0 -1 0"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
-  <!-- Top cover upper block (rear) -->
-  <link name="cover_upper">
+  <link name="back_left_wheel_link">
+    <inertial>
+      <origin xyz="9.81132275645891E-06 -0.0153112913634179 3.31719395489927E-05" rpy="0 0 0"/>
+      <mass value="0.0536934866827212"/>
+      <inertia
+        ixx="5.73494929557079E-06" ixy="-3.19640960455031E-11" ixz="-3.71734901295681E-11"
+        iyy="6.54339836266498E-06" iyz="3.32785548366247E-11" izz="5.73425009124004E-06"/>
+    </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.094 0.100 0.060"/>
+        <mesh filename="package://auto_car_description/meshes/back_left_wheel_link.STL"/>
       </geometry>
-      <material name="grey">
-        <color rgba="0.7 0.7 0.7 1.0"/>
+      <material name="">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
       </material>
     </visual>
     <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.094 0.100 0.060"/>
+        <mesh filename="package://auto_car_description/meshes/back_left_wheel_link.STL"/>
       </geometry>
     </collision>
-    <inertial>
-      <mass value="0.1"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
-    </inertial>
   </link>
 
-  <joint name="joint_cover_upper" type="fixed">
-    <parent link="base_link"/>
-    <child link="cover_upper"/>
-    <origin xyz="-0.060 0.0 0.0465" rpy="0 0 0"/>
+  <joint name="back_left_wheel_joint" type="continuous">
+    <origin xyz="0.77108 -1.432 0.91691" rpy="0 0 3.1416"/>
+    <parent link="chassis_link"/>
+    <child link="back_left_wheel_link"/>
+    <axis xyz="0 -1 0"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
-  <!-- LiDAR -->
   <link name="lidar_link">
+    <inertial>
+      <origin xyz="-7.74814649494582E-05 4.4957855660499E-08 -0.022838362366054" rpy="0 0 0"/>
+      <mass value="0.102513123166222"/>
+      <inertia
+        ixx="3.5050990060965E-05" ixy="-8.48544915785726E-11" ixz="-1.05221513767196E-07"
+        iyy="3.53118134327243E-05" iyz="1.36969124350589E-11" izz="4.34973422623282E-05"/>
+    </inertial>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.0556 0.0556 0.041"/>
+        <mesh filename="package://auto_car_description/meshes/lidar_link.STL"/>
       </geometry>
-      <material name="black">
-        <color rgba="0.1 0.1 0.1 1.0"/>
+      <material name="">
+        <color rgba="0.298039215686275 0.298039215686275 0.298039215686275 1"/>
       </material>
     </visual>
     <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.0556 0.0556 0.041"/>
+        <mesh filename="package://auto_car_description/meshes/lidar_link.STL"/>
       </geometry>
     </collision>
-    <inertial>
-      <mass value="0.17"/>
-      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
-    </inertial>
   </link>
 
-  <joint name="joint_lidar" type="fixed">
-    <parent link="base_link"/>
+  <joint name="lidar_joint" type="fixed">
+    <origin xyz="0.74291 -1.3383 1.0394" rpy="0 0 3.1416"/>
+    <parent link="chassis_link"/>
     <child link="lidar_link"/>
-    <origin xyz="-0.060 0.0 0.097" rpy="0 0 0"/>
+    <axis xyz="0 0 0"/>
   </joint>
 
   <gazebo>
     <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
-      <left_joint>joint_front_left</left_joint>
-      <left_joint>joint_rear_left</left_joint>
-      <right_joint>joint_front_right</right_joint>
-      <right_joint>joint_rear_right</right_joint>
-      <wheel_separation>0.151</wheel_separation>
+      <left_joint>front_left_wheel_joint</left_joint>
+      <left_joint>back_left_wheel_joint</left_joint>
+      <right_joint>front_right_wheel_joint</right_joint>
+      <right_joint>back_right_wheel_joint</right_joint>
+      <wheel_separation>0.19</wheel_separation>
       <wheel_radius>0.030</wheel_radius>
       <topic>cmd_vel</topic>
       <odom_topic>odom</odom_topic>
